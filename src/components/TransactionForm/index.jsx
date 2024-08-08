@@ -1,11 +1,15 @@
 import { useState } from "react"
 import { Card, Form, Heading, Input, Label, Select } from "./styles"
 import { Button } from "../Button"
+import { useRecoilValue } from "recoil"
+import { transactionTypesState } from "../../recoil/atoms/transactionTypesAtom"
 
 export const TransactionForm = () => {
 
     const [transactionType, setTransactionType] = useState('')
     const [transactionValue, setSetTransactionValue] = useState('')
+
+    const transactionTypes = useRecoilValue(transactionTypesState)
 
     const createTransacion = (evt) => {
         evt.preventDefault()
@@ -29,6 +33,7 @@ export const TransactionForm = () => {
                     <option value="" disabled hidden>
                         Selecione o tipo de transação
                     </option>
+                    {transactionTypes.map((type) => <option value={type} key={type}>{type}</option>)}
                 </Select>
                 <div>
                     <Label>
