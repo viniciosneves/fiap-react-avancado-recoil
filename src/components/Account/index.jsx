@@ -1,5 +1,7 @@
+import { useRecoilValue } from "recoil";
 import { Balance } from "./Balance";
 import { BalanceWrapper, Card, DateWrapper, Heading } from "./styles"
+import { balanceSelector } from "../../recoil/selectors/balanceSelector";
 
 
 const options = {
@@ -10,6 +12,9 @@ const options = {
 };
 
 export const Account = () => {
+
+    const balance = useRecoilValue(balanceSelector)
+
     return (<Card>
         <div>
             <Heading>
@@ -20,7 +25,7 @@ export const Account = () => {
             </DateWrapper>
         </div>
         <BalanceWrapper>
-            <Balance valor={2500}/>
+            <Balance valor={balance}/>
         </BalanceWrapper>
     </Card>)
 }

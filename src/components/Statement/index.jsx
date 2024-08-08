@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 import { Transaction } from "../Transaction";
 import { Container, Heading, TransactionsList } from "./styles";
-import { transactionsState } from "../../recoil/atoms/transactionsAtom";
+import { transactionsSelector } from "../../recoil/selectors/transactionsSelector";
 
 // const transactions = [
 //     {
@@ -31,7 +31,7 @@ import { transactionsState } from "../../recoil/atoms/transactionsAtom";
 // ];
 
 export const Statement = () => {
-    const transactions = useRecoilValue(transactionsState)
+    const transactions = useRecoilValue(transactionsSelector)
     return (<Container>
         <Heading>
             Extrato
