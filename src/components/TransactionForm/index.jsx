@@ -1,21 +1,29 @@
 import { useState } from "react"
 import { Card, Form, Heading, Input, Label, Select } from "./styles"
 import { Button } from "../Button"
-import { useRecoilValue } from "recoil"
+import { useRecoilValue, useSetRecoilState } from "recoil"
 import { transactionTypesState } from "../../recoil/atoms/transactionTypesAtom"
+import { transactionsState } from "../../recoil/atoms/transactionsAtom"
 
 export const TransactionForm = () => {
 
     const [transactionType, setTransactionType] = useState('')
     const [transactionValue, setSetTransactionValue] = useState('')
 
+    const setTransactions = useSetRecoilState(transactionsState)
+
     const transactionTypes = useRecoilValue(transactionTypesState)
 
     const createTransacion = (evt) => {
         evt.preventDefault()
-        console.log({
-            transactionType,
-            transactionValue
+        setTransactions(prevState => {
+            const newTransaction = {
+                value: parseFloat(transactionValue),
+                type: transactionType,
+                id: prevState.length + 1,
+                date: new Date()
+            }
+            return [...prevState, newTransaction]
         })
     }
 
